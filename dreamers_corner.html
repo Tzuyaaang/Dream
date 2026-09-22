@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dreamers Corner - 23rd CDM Founding Anniversary</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Sacramento&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Cinzel"', 'serif'],
+            cursive: ['"Sacramento"', 'cursive'],
+          },
+          colors: {
+            cosmic: {
+              950: '#080216',
+              900: '#0f0529',
+              850: '#170a3d',
+              800: '#231154',
+              700: '#3c1d7e',
+              500: '#7c3aed',
+              400: '#a855f7',
+              300: '#c084fc',
+              200: '#e9d5ff',
+            },
+            magical: {
+              gold: '#fbbf24',
+              starlight: '#fef08a',
+              cyan: '#38bdf8',
+              rose: '#f472b6',
+              lavender: '#d8b4fe'
+            }
+          },
+          animation: {
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float-slow': 'floatGentle 6s ease-in-out infinite',
+            'spin-slow': 'spin 20s linear infinite',
+            'twinkle': 'twinkle 3s ease-in-out infinite alternate',
+          },
+          keyframes: {
+            floatGentle: {
+              '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+              '50%': { transform: 'translateY(-12px) rotate(0.8deg)' },
+            },
+            twinkle: {
+              '0%': { opacity: '0.2', transform: 'scale(0.8)' },
+              '100%': { opacity: '1', transform: 'scale(1.2)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom scrollbar and backdrop enhancements */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(15, 5, 41, 0.6);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(168, 85, 247, 0.4);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(192, 132, 252, 0.7);
+    }
+
+    .glass-panel {
+      background: radial-gradient(130% 100% at 10% 10%, rgba(55, 23, 114, 0.45) 0%, rgba(20, 8, 48, 0.65) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(192, 132, 252, 0.22);
+      box-shadow: 0 16px 40px -10px rgba(12, 3, 30, 0.8), 0 0 30px rgba(168, 85, 247, 0.15) inset;
+    }
+
+    .cloud-card {
+      user-select: none;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, opacity 0.3s ease;
+      cursor: pointer;
+      will-change: transform;
+    }
+    .cloud-card:hover {
+      transform: scale(1.08) translateY(-6px) !important;
+      z-index: 50 !important;
+    }
+
+    /* Magical text glow */
+    .glow-gold {
+      text-shadow: 0 0 18px rgba(251, 191, 36, 0.6), 0 0 35px rgba(245, 158, 11, 0.3);
+    }
+    .glow-purple {
+      text-shadow: 0 0 20px rgba(192, 132, 252, 0.8), 0 0 45px rgba(168, 85, 247, 0.5);
+    }
+
+    /* Shooting star canvas overlay */
+    #skyCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Magical cloud border shimmer */
+    .shimmer-border {
+      position: relative;
+    }
+    .shimmer-border::after {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.4), rgba(168,85,247,0.1), rgba(251,191,36,0.3));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="bg-cosmic-950 text-slate-100 min-h-screen overflow-x-hidden font-sans selection:bg-purple-600 selection:text-white relative">
+  <!-- Interactive Cosmic Sky Canvas (Stars, Nebulas, Shooting Stars) -->
+  <canvas id="skyCanvas"></canvas>
+
+  <!-- Ambient Ethereal Glow Orbs -->
+  <div class="fixed top-[-10%] left-[-5%] w-[45vw] h-[45vw] rounded-full bg-purple-900/25 blur-[120px] pointer-events-none z-0"></div>
+  <div class="fixed bottom-[-15%] right-[-10%] w-[55vw] h-[55vw] rounded-full bg-indigo-900/20 blur-[140px] pointer-events-none z-0"></div>
+  <div class="fixed top-[35%] right-[20%] w-[35vw] h-[35vw] rounded-full bg-fuchsia-950/20 blur-[130px] pointer-events-none z-0"></div>
+
+  <!-- Main Container -->
+  <div class="relative z-10 flex flex-col min-h-screen overflow-hidden">
+
+    <!-- Top Celestial Navigation / Projection Header -->
+    <header id="mainHeader" class="w-full px-6 py-4 flex items-center justify-between transition-all duration-500 z-30 border-b border-purple-500/15 glass-panel">
+      <!-- CDM Anniversary Brand -->
+      <div class="flex items-center space-x-4">
+        <div class="relative flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-tr from-purple-800 to-indigo-600 border border-purple-300/30 shadow-lg shadow-purple-900/40">
+          <span class="text-2xl filter drop-shadow">✨</span>
+          <span class="absolute -top-1 -right-1 flex h-4 w-4">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-magical-gold opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-4 w-4 bg-magical-gold text-[9px] font-bold text-cosmic-950 items-center justify-center">23</span>
+          </span>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <h1 class="text-xl md:text-2xl font-black font-serif tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-purple-100 to-amber-200 glow-purple">
+              Dreamers Corner
+            </h1>
+            <span class="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest bg-amber-400/20 text-amber-300 border border-amber-400/30 shadow-sm">
+              23rd CDM Founding Anniversary
+            </span>
+          </div>
+          <p class="text-xs text-purple-300/80 font-light flex items-center space-x-1.5">
+            <span>Where student dreams take flight among the stars</span>
+            <span class="inline-block w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse"></span>
+            <span id="activeCountBadge" class="text-amber-200 font-medium">12 Dreams Floating</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Right Action Controls (Submit, Sound, Projector Mode, Settings) -->
+      <div class="flex items-center space-x-2 md:space-x-3">
+        <!-- Audio Synth Chimes Button -->
+        <button id="soundToggleBtn" class="p-2.5 rounded-xl bg-purple-900/50 hover:bg-purple-800/60 border border-purple-400/20 text-purple-200 hover:text-white transition flex items-center space-x-1.5 text-xs font-semibold shadow-inner" title="Toggle Magical Chimes">
+          <span id="soundIcon">🔔</span>
+          <span class="hidden md:inline" id="soundLabel">Sound Chimes: On</span>
+        </button>
+
+        <!-- Projector Mode Toggle -->
+        <button id="projectorToggleBtn" class="px-3.5 py-2.5 rounded-xl bg-purple-800/40 hover:bg-purple-700/50 border border-purple-300/30 text-amber-200 hover:text-white transition flex items-center space-x-2 text-xs font-bold tracking-wide shadow-md hover:shadow-purple-700/20" title="Toggle Clean Stage View for Projector">
+          <svg class="w-4 h-4 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          <span class="hidden sm:inline">Projector View</span>
+        </button>
+
+        <!-- QR Code / Share Info -->
+        <button id="qrModalBtn" class="p-2.5 rounded-xl bg-purple-900/50 hover:bg-purple-800/60 border border-purple-400/20 text-purple-200 hover:text-white transition text-xs font-semibold" title="Show Share Code / Instructions">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/></svg>
+        </button>
+
+        <!-- New Dream CTA -->
+        <button id="openDreamModalBtn" class="relative group overflow-hidden px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 via-fuchsia-500 to-purple-600 text-white font-bold text-xs md:text-sm tracking-wide shadow-lg shadow-purple-900/50 hover:shadow-purple-600/50 transition transform hover:-translate-y-0.5 active:translate-y-0 flex items-center space-x-2">
+          <span class="text-base group-hover:rotate-45 transition duration-300">🪄</span>
+          <span>Cast Your Dream</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Floating Clouds Stage (Occupies majority of the screen) -->
+    <main id="cloudStage" class="relative flex-1 w-full h-full min-h-[550px] overflow-hidden select-none">
+      
+      <!-- Center Projector Watermark (Subtle ethereal watermark) -->
+      <div id="projectorWatermark" class="pointer-events-none absolute inset-0 flex flex-col items-center justify-center opacity-30 select-none transition-opacity duration-700">
+        <div class="text-center transform -translate-y-4">
+          <div class="text-6xl md:text-8xl opacity-40 font-serif font-black text-purple-300/30 tracking-widest">CDM 23</div>
+          <p class="font-cursive text-3xl md:text-5xl text-amber-200/50 mt-1">Honoring Legacy, Igniting Dreams</p>
+          <p class="text-xs tracking-widest text-purple-200/40 uppercase mt-2">Tap any cloud to listen & discover aspirations</p>
+        </div>
+      </div>
+
+      <!-- DOM Layer for Clouds (Positioned absolutely via JS engine) -->
+      <div id="cloudsContainer" class="absolute inset-0 w-full h-full pointer-events-auto">
+        <!-- Floating cloud cards will be dynamically mounted here -->
+      </div>
+
+      <!-- Quick Projector Stage HUD Overlay (Bottom-left speed & controls) -->
+      <div id="stageControls" class="absolute bottom-6 left-6 z-20 flex flex-wrap items-center gap-2 glass-panel py-2 px-3 rounded-2xl border border-purple-400/20 text-xs">
+        <div class="flex items-center space-x-1.5 pr-2 border-r border-purple-500/30">
+          <span class="text-purple-300">Drift:</span>
+          <button id="speedSlowBtn" class="px-2 py-1 rounded-lg bg-purple-900/60 hover:bg-purple-800 text-purple-200 transition text-[11px]">Gentle</button>
+          <button id="speedNormalBtn" class="px-2 py-1 rounded-lg bg-purple-700 text-white font-semibold transition text-[11px]">Breeze</button>
+          <button id="pauseDriftBtn" class="px-2 py-1 rounded-lg bg-purple-900/60 hover:bg-purple-800 text-purple-200 transition text-[11px]">Pause</button>
+        </div>
+        
+        <!-- Filter Category Pill dropdown -->
+        <div class="flex items-center space-x-1 pl-1">
+          <span class="text-purple-300">Filter:</span>
+          <select id="filterCategory" class="bg-cosmic-900/90 text-purple-200 border border-purple-500/40 rounded-lg px-2 py-1 text-[11px] focus:outline-none focus:ring-1 focus:ring-purple-400">
+            <option value="ALL">All Categories ✨</option>
+            <option value="Anniversary">CDM 23rd Wishes 🎂</option>
+            <option value="Future">Future Aspirations 🚀</option>
+            <option value="Inspiration">Daily Sparks 💡</option>
+            <option value="Gratitude">Gratitude & Heart 💜</option>
+          </select>
+        </div>
+
+        <button id="scatterBtn" class="px-2.5 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-200 border border-amber-400/30 text-[11px] font-medium transition" title="Reposition clouds evenly across the sky">
+          Stardust Shuffle 🌌
+        </button>
+      </div>
+
+      <!-- Quick Guide Hint (Projector screen info) -->
+      <div id="projectionHint" class="absolute bottom-6 right-6 z-20 hidden md:flex items-center space-x-2 text-xs text-purple-300/70 glass-panel px-3.5 py-2 rounded-2xl pointer-events-none">
+        <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+        <span>Live Floating Feed • Displayed for the 23rd CDM Founding Celebration</span>
+      </div>
+
+    </main>
+
+    <!-- Modal: Cast Your Dream Form -->
+    <div id="dreamModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-cosmic-950/80 backdrop-blur-md hidden transition-opacity duration-300">
+      <div class="relative w-full max-w-lg glass-panel rounded-3xl p-6 sm:p-8 border border-purple-300/30 shadow-2xl text-slate-100 overflow-hidden">
+        <!-- Decorative Glow Top -->
+        <div class="absolute -top-16 -left-16 w-40 h-40 bg-purple-500/30 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-16 -right-16 w-40 h-40 bg-amber-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="flex items-center justify-between pb-4 border-b border-purple-500/20">
+          <div class="flex items-center space-x-2">
+            <span class="text-3xl">☁️</span>
+            <div>
+              <h2 class="text-lg font-bold font-serif text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-purple-100 to-white">
+                Release Your Dream Cloud
+              </h2>
+              <p class="text-xs text-purple-300">23rd CDM Founding Anniversary Memorabilia</p>
+            </div>
+          </div>
+          <button id="closeDreamModalBtn" class="text-purple-300 hover:text-white p-1 rounded-xl bg-purple-900/40 hover:bg-purple-800 transition">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+
+        <form id="dreamForm" class="mt-5 space-y-4">
+          <!-- Name & Department -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-purple-200 mb-1">Your Name / Alias <span class="text-amber-400">*</span></label>
+              <input type="text" id="authorInput" required maxlength="30" placeholder="e.g. Maria Santos / Dreamer #23" class="w-full bg-cosmic-900/80 border border-purple-500/40 rounded-xl px-3.5 py-2.5 text-sm text-purple-100 placeholder-purple-400/50 focus:outline-none focus:ring-2 focus:ring-purple-400">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-purple-200 mb-1">CDM Academic Program <span class="text-amber-400">*</span></label>
+              <select id="courseInput" required class="w-full bg-cosmic-900/90 border border-purple-500/40 rounded-xl px-3.5 py-2.5 text-sm text-purple-100 focus:outline-none focus:ring-2 focus:ring-purple-400 cursor-pointer">
+                <option value="" disabled selected>Select your CDM program</option>
+                <option value="BSED-SCI">BSED-SCI</option>
+                <option value="BEED-GEN">BEED-GEN</option>
+                <option value="BECED">BECED</option>
+                <option value="BTLED-ICT">BTLED-ICT</option>
+                <option value="BSCPE">BSCPE</option>
+                <option value="BSIT">BSIT</option>
+                <option value="BSBA-HRM">BSBA-HRM</option>
+                <option value="BSE">BSE</option>
+                <option value="CDM Faculty / Staff">CDM Faculty / Staff / Alumni</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Category Selection -->
+          <div>
+            <label class="block text-xs font-semibold text-purple-200 mb-1">Dream Category</label>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              <label class="cursor-pointer">
+                <input type="radio" name="dreamCategory" value="Anniversary" checked class="peer sr-only">
+                <div class="p-2 text-center rounded-xl bg-purple-900/40 border border-purple-500/30 peer-checked:border-amber-400 peer-checked:bg-purple-800/80 text-[11px] font-semibold text-purple-200 peer-checked:text-amber-300 transition">
+                  🎂 CDM 23rd
+                </div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="dreamCategory" value="Future" class="peer sr-only">
+                <div class="p-2 text-center rounded-xl bg-purple-900/40 border border-purple-500/30 peer-checked:border-cyan-400 peer-checked:bg-purple-800/80 text-[11px] font-semibold text-purple-200 peer-checked:text-cyan-300 transition">
+                  🚀 Ambition
+                </div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="dreamCategory" value="Gratitude" class="peer sr-only">
+                <div class="p-2 text-center rounded-xl bg-purple-900/40 border border-purple-500/30 peer-checked:border-pink-400 peer-checked:bg-purple-800/80 text-[11px] font-semibold text-purple-200 peer-checked:text-pink-300 transition">
+                  💜 Gratitude
+                </div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="dreamCategory" value="Inspiration" class="peer sr-only">
+                <div class="p-2 text-center rounded-xl bg-purple-900/40 border border-purple-500/30 peer-checked:border-emerald-400 peer-checked:bg-purple-800/80 text-[11px] font-semibold text-purple-200 peer-checked:text-emerald-300 transition">
+                  💡 Spark
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Message / Thought -->
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <label class="block text-xs font-semibold text-purple-200">Your Thought, Vision or Wish <span class="text-amber-400">*</span></label>
+              <span id="charCount" class="text-[10px] text-purple-400">0/180</span>
+            </div>
+            <textarea id="messageInput" required maxlength="180" rows="3" placeholder="What are your wishes for CDM on its 23rd year? What dreams are you nurturing for yourself and our community?" class="w-full bg-cosmic-900/80 border border-purple-500/40 rounded-xl p-3.5 text-sm text-purple-100 placeholder-purple-400/50 focus:outline-none focus:ring-2 focus:ring-purple-400"></textarea>
+          </div>
+
+          <!-- Cloud Color Aura Theme -->
+          <div>
+            <label class="block text-xs font-semibold text-purple-200 mb-1.5">Select Cloud Starlight Aura</label>
+            <div class="flex items-center space-x-3">
+              <label class="cursor-pointer flex items-center space-x-1">
+                <input type="radio" name="cloudTheme" value="purple" checked class="peer sr-only">
+                <span class="w-7 h-7 rounded-full bg-purple-600 border-2 border-transparent peer-checked:border-white shadow-lg inline-block transition transform peer-checked:scale-110"></span>
+              </label>
+              <label class="cursor-pointer flex items-center space-x-1">
+                <input type="radio" name="cloudTheme" value="gold" class="peer sr-only">
+                <span class="w-7 h-7 rounded-full bg-amber-400 border-2 border-transparent peer-checked:border-white shadow-lg inline-block transition transform peer-checked:scale-110"></span>
+              </label>
+              <label class="cursor-pointer flex items-center space-x-1">
+                <input type="radio" name="cloudTheme" value="cyan" class="peer sr-only">
+                <span class="w-7 h-7 rounded-full bg-sky-400 border-2 border-transparent peer-checked:border-white shadow-lg inline-block transition transform peer-checked:scale-110"></span>
+              </label>
+              <label class="cursor-pointer flex items-center space-x-1">
+                <input type="radio" name="cloudTheme" value="rose" class="peer sr-only">
+                <span class="w-7 h-7 rounded-full bg-pink-500 border-2 border-transparent peer-checked:border-white shadow-lg inline-block transition transform peer-checked:scale-110"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Submit Buttons -->
+          <div class="pt-2 flex items-center justify-end space-x-3">
+            <button type="button" id="cancelDreamBtn" class="px-4 py-2.5 rounded-xl bg-purple-900/30 hover:bg-purple-900/60 text-purple-300 text-xs font-semibold transition">
+              Cancel
+            </button>
+            <button type="submit" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 via-fuchsia-500 to-purple-600 hover:from-amber-300 hover:to-purple-500 text-white font-bold text-xs shadow-lg shadow-purple-900/60 transition transform hover:-translate-y-0.5 flex items-center space-x-1.5">
+              <span>Send into the Sky</span>
+              <span>✨</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal: View Single Dream in Big Glory (Projector Spotlight) -->
+    <div id="detailModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-cosmic-950/85 backdrop-blur-md hidden transition-opacity duration-300">
+      <div id="detailCard" class="relative w-full max-w-xl glass-panel rounded-3xl p-7 sm:p-10 border border-purple-300/40 shadow-2xl text-slate-100 overflow-hidden transform scale-95 transition-transform duration-300">
+        <!-- Floating star embellishment -->
+        <div class="absolute -top-10 -right-10 text-8xl opacity-15 select-none pointer-events-none">🌟</div>
+        <div class="absolute top-4 left-6 flex items-center space-x-2">
+          <span id="detailCategoryBadge" class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-400/20 text-amber-300 border border-amber-400/40">
+            CDM 23rd Wish
+          </span>
+          <span id="detailTime" class="text-xs text-purple-300/70">Just now</span>
+        </div>
+
+        <button id="closeDetailModalBtn" class="absolute top-4 right-4 text-purple-300 hover:text-white p-2 rounded-xl bg-purple-900/40 hover:bg-purple-800 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+
+        <div class="mt-8 text-center sm:text-left">
+          <p id="detailQuote" class="text-xl sm:text-2xl font-serif leading-relaxed text-purple-100 italic glow-purple">
+            "May CDM continue to be the beacon of hope and excellence for every student in our city!"
+          </p>
+        </div>
+
+        <div class="mt-6 pt-5 border-t border-purple-400/20 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="flex items-center space-x-3">
+            <div id="detailAvatar" class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-purple-600 to-amber-400 flex items-center justify-center text-lg font-bold shadow-md">
+              M
+            </div>
+            <div>
+              <h3 id="detailAuthor" class="font-bold text-sm text-purple-200">Maria Santos</h3>
+              <p id="detailCourse" class="text-xs text-purple-400">BSCS - 3rd Year</p>
+            </div>
+          </div>
+
+          <!-- Interactive Reactions for Audience / Projector -->
+          <div class="flex items-center space-x-2 bg-purple-950/60 p-1.5 rounded-2xl border border-purple-500/20">
+            <button class="reaction-btn px-2.5 py-1.5 rounded-xl hover:bg-purple-800/60 text-xs flex items-center space-x-1 text-purple-200 transition" data-reaction="sparkle">
+              <span>✨</span>
+              <span id="detailReactionSparkle" class="font-bold text-amber-300">14</span>
+            </button>
+            <button class="reaction-btn px-2.5 py-1.5 rounded-xl hover:bg-purple-800/60 text-xs flex items-center space-x-1 text-purple-200 transition" data-reaction="heart">
+              <span>💜</span>
+              <span id="detailReactionHeart" class="font-bold text-pink-300">28</span>
+            </button>
+            <button class="reaction-btn px-2.5 py-1.5 rounded-xl hover:bg-purple-800/60 text-xs flex items-center space-x-1 text-purple-200 transition" data-reaction="star">
+              <span>🌟</span>
+              <span id="detailReactionStar" class="font-bold text-yellow-300">9</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: QR Code & Audience Participation Screen -->
+    <div id="qrModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-cosmic-950/80 backdrop-blur-md hidden transition-opacity duration-300">
+      <div class="relative w-full max-w-md glass-panel rounded-3xl p-7 border border-purple-300/30 text-center shadow-2xl">
+        <button id="closeQrModalBtn" class="absolute top-4 right-4 text-purple-300 hover:text-white p-1 rounded-xl bg-purple-900/40">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+
+        <span class="text-4xl">📱✨</span>
+        <h3 class="text-xl font-bold font-serif text-amber-200 mt-2">Send From Your Phone</h3>
+        <p class="text-xs text-purple-300 mt-1">Students and guests: Tap "Cast Your Dream" to launch your dreams instantly onto this stage screen!</p>
+
+        <!-- Simulated Stylized QR Code for live auditorium -->
+        <div class="my-6 mx-auto w-48 h-48 bg-white p-3 rounded-2xl shadow-xl flex flex-col items-center justify-center relative overflow-hidden group">
+          <svg class="w-full h-full text-cosmic-950" viewBox="0 0 100 100" fill="currentColor">
+            <path d="M10 10h30v30h-30zM15 15v20h20v-20zM22 22h6v6h-6zM60 10h30v30h-30zM65 15v20h20v-20zM72 22h6v6h-6zM10 60h30v30h-30zM15 65v20h20v-20zM22 72h6v6h-6zM50 15h6v6h-6zM50 25h6v12h-6zM50 45h10v6h-10zM15 48h18v6h-18zM60 52h8v8h-8zM72 50h18v6h-18zM80 62h10v10h-10zM52 68h12v6h-12zM70 75h10v15h-10zM85 80h8v10h-8zM50 82h12v8h-12z"/>
+          </svg>
+          <div class="absolute inset-0 bg-gradient-to-t from-purple-900/30 to-transparent pointer-events-none"></div>
+          <div class="absolute bottom-2 text-[9px] font-mono tracking-tight font-black bg-purple-900 text-white px-2 py-0.5 rounded">
+            CDM.DREAMERS.CORNER
+          </div>
+        </div>
+
+        <div class="text-xs text-purple-200/90 bg-purple-900/40 p-3 rounded-xl border border-purple-400/20">
+          <p class="font-bold text-amber-300">Audience Quick Link:</p>
+          <p class="font-mono text-purple-200 select-all mt-0.5">https://cdm-founding.edu/dreamers</p>
+        </div>
+
+        <button id="understoodQrBtn" class="mt-5 w-full py-2.5 rounded-xl bg-purple-700 hover:bg-purple-600 text-white font-semibold text-xs transition">
+          Back to Sky Display
+        </button>
+      </div>
+    </div>
+
+    <!-- Floating Magical Toast Container -->
+    <div id="toastNotification" class="fixed top-20 right-6 z-50 pointer-events-none transition-all duration-300 transform translate-y-[-20px] opacity-0">
+      <div class="glass-panel px-4 py-3 rounded-2xl border border-amber-300/40 shadow-xl flex items-center space-x-3">
+        <span class="text-xl" id="toastIcon">✨</span>
+        <div>
+          <p id="toastTitle" class="text-xs font-bold text-amber-200">Dream Ascended!</p>
+          <p id="toastMessage" class="text-[11px] text-purple-200">Your cloud is now floating in the sky.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    /* Web Audio API Magical Chime Synthesizer (No external audio files) */
+    class MagicalAudio {
+      constructor() {
+        this.ctx = null;
+        this.enabled = true;
+        // Pentatonic scale frequencies for dreamy angelic chime sounds
+        this.notes = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 659.25, 783.99, 880.00, 1046.50];
+      }
+
+      initContext() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) {
+            this.ctx = new AudioContext();
+          }
+        }
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
+
+      playChime(noteIndex = null, duration = 1.6) {
+        if (!this.enabled) return;
+        this.initContext();
+        if (!this.ctx) return;
+
+        try {
+          const now = this.ctx.currentTime;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+
+          const freq = noteIndex !== null 
+            ? this.notes[noteIndex % this.notes.length] 
+            : this.notes[Math.floor(Math.random() * this.notes.length)];
+
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, now);
+
+          // Subtle pitch shimmer
+          osc.frequency.exponentialRampToValueAtTime(freq * 1.004, now + duration);
+
+          // Envelope
+          gain.gain.setValueAtTime(0.001, now);
+          gain.gain.exponentialRampToValueAtTime(0.2, now + 0.04);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+
+          osc.start(now);
+          osc.stop(now + duration);
+        } catch (e) {
+          console.warn("Audio chime prevented", e);
+        }
+      }
+
+      playHarpGlissando() {
+        if (!this.enabled) return;
+        this.initContext();
+        for (let i = 0; i < 5; i++) {
+          setTimeout(() => {
+            this.playChime(i * 2 + 1, 1.4);
+          }, i * 90);
+        }
+      }
+    }
+
+    const soundManager = new MagicalAudio();
+
+    const canvas = document.getElementById('skyCanvas');
+    const ctx = canvas.getContext('2d');
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      initStars();
+    });
+
+    // Star and Particle System
+    const stars = [];
+    const shootingStars = [];
+
+    function initStars() {
+      stars.length = 0;
+      const starCount = Math.floor((width * height) / 4500);
+      for (let i = 0; i < starCount; i++) {
+        stars.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          size: Math.random() * 1.8 + 0.3,
+          alpha: Math.random() * 0.8 + 0.2,
+          speed: Math.random() * 0.02 + 0.005,
+          phase: Math.random() * Math.PI * 2,
+          color: Math.random() > 0.8 ? '#fef08a' : Math.random() > 0.6 ? '#c084fc' : '#ffffff'
+        });
+      }
+    }
+    initStars();
+
+    function spawnShootingStar() {
+      if (Math.random() < 0.015 && shootingStars.length < 3) {
+        shootingStars.push({
+          x: Math.random() * width,
+          y: Math.random() * (height * 0.5),
+          len: Math.random() * 120 + 80,
+          speed: Math.random() * 9 + 8,
+          angle: Math.PI / 4 + (Math.random() * 0.2 - 0.1),
+          opacity: 1,
+          decay: Math.random() * 0.02 + 0.015
+        });
+      }
+    }
+
+    function renderSky() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Render static/twinkling stars
+      for (let i = 0; i < stars.length; i++) {
+        const star = stars[i];
+        star.phase += star.speed;
+        const currentAlpha = 0.3 + (Math.sin(star.phase) + 1) * 0.35 * star.alpha;
+        
+        ctx.fillStyle = star.color;
+        ctx.globalAlpha = currentAlpha;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Render & update shooting stars
+      spawnShootingStar();
+      for (let i = shootingStars.length - 1; i >= 0; i--) {
+        const s = shootingStars[i];
+        const tailX = s.x - Math.cos(s.angle) * s.len;
+        const tailY = s.y - Math.sin(s.angle) * s.len;
+
+        const grad = ctx.createLinearGradient(tailX, tailY, s.x, s.y);
+        grad.addColorStop(0, 'rgba(251, 191, 36, 0)');
+        grad.addColorStop(1, `rgba(255, 255, 255, ${s.opacity})`);
+
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.8;
+        ctx.globalAlpha = s.opacity;
+        ctx.beginPath();
+        ctx.moveTo(tailX, tailY);
+        ctx.lineTo(s.x, s.y);
+        ctx.stroke();
+
+        s.x += Math.cos(s.angle) * s.speed;
+        s.y += Math.sin(s.angle) * s.speed;
+        s.opacity -= s.decay;
+
+        if (s.opacity <= 0 || s.x > width || s.y > height) {
+          shootingStars.splice(i, 1);
+        }
+      }
+
+      ctx.globalAlpha = 1.0;
+      requestAnimationFrame(renderSky);
+    }
+    requestAnimationFrame(renderSky);
+
+    // Floating sample messages removed; stage is prepared for live CDM student entries
+    const initialDreams = [];
+
+    const cloudStage = document.getElementById('cloudStage');
+    const cloudsContainer = document.getElementById('cloudsContainer');
+    let dreamsList = [...initialDreams];
+    let cloudEntities = [];
+    let driftSpeed = 0.65; // base speed
+    let isPaused = false;
+    let selectedCategory = 'ALL';
+
+    // Theme configuration dictionary for clouds
+    const themeStyles = {
+      purple: {
+        bg: 'from-purple-900/60 via-purple-950/70 to-indigo-950/80',
+        glow: 'rgba(168, 85, 247, 0.45)',
+        border: 'border-purple-400/30',
+        badge: 'bg-purple-500/25 text-purple-200 border-purple-400/40',
+        accent: 'text-purple-300'
+      },
+      gold: {
+        bg: 'from-amber-950/60 via-purple-950/70 to-yellow-950/80',
+        glow: 'rgba(251, 191, 36, 0.45)',
+        border: 'border-amber-400/40',
+        badge: 'bg-amber-500/25 text-amber-200 border-amber-400/40',
+        accent: 'text-amber-300'
+      },
+      cyan: {
+        bg: 'from-sky-950/60 via-indigo-950/70 to-blue-950/80',
+        glow: 'rgba(56, 189, 248, 0.45)',
+        border: 'border-cyan-400/30',
+        badge: 'bg-cyan-500/25 text-cyan-200 border-cyan-400/40',
+        accent: 'text-cyan-300'
+      },
+      rose: {
+        bg: 'from-pink-950/60 via-purple-950/70 to-rose-950/80',
+        glow: 'rgba(244, 114, 182, 0.45)',
+        border: 'border-pink-400/30',
+        badge: 'bg-pink-500/25 text-pink-200 border-pink-400/40',
+        accent: 'text-pink-300'
+      }
+    };
+
+    function createCloudElement(dream, index) {
+      const el = document.createElement('div');
+      const theme = themeStyles[dream.theme] || themeStyles.purple;
+
+      el.className = `cloud-card absolute rounded-[36px] p-4 sm:p-5 select-none text-left bg-gradient-to-br ${theme.bg} ${theme.border} border backdrop-blur-md shadow-lg transition-shadow duration-300`;
+      el.style.boxShadow = `0 10px 30px -5px ${theme.glow}`;
+      el.dataset.id = dream.id;
+
+      // Realistic cloud-shaped bubbly outline
+      el.innerHTML = `
+        <div class="relative z-10 w-64 sm:w-72">
+          <!-- Top cloud icon & category badge -->
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs px-2.5 py-0.5 rounded-full font-semibold border ${theme.badge}">
+              ${dream.category === 'Anniversary' ? '🎂 CDM 23rd' : dream.category === 'Future' ? '🚀 Ambition' : dream.category === 'Gratitude' ? '💜 Gratitude' : '💡 Spark'}
+            </span>
+            <div class="flex items-center space-x-1.5 text-xs text-purple-300/80">
+              <span>✨</span>
+              <span class="font-bold text-amber-200">${dream.reactions.heart + dream.reactions.sparkle}</span>
+            </div>
+          </div>
+
+          <!-- Message excerpt -->
+          <p class="text-xs sm:text-sm font-medium leading-snug line-clamp-3 text-slate-100 font-serif">
+            "${dream.message}"
+          </p>
+
+          <!-- Author attribution -->
+          <div class="mt-3 pt-2.5 border-t border-purple-400/20 flex items-center justify-between">
+            <div class="truncate max-w-[170px]">
+              <h4 class="text-xs font-bold text-slate-200 truncate">${dream.author}</h4>
+              <p class="text-[10px] text-purple-300/70 truncate">${dream.course || 'CDMian'}</p>
+            </div>
+            <span class="text-[10px] text-amber-300/80 font-mono tracking-tight bg-purple-900/50 px-2 py-0.5 rounded-full">Tap to open</span>
+          </div>
+        </div>
+
+        <!-- Decorative cloud puffs (Whimsical cloud shape aura) -->
+        <div class="absolute -top-3 left-6 w-12 h-12 rounded-full bg-inherit blur-[2px] opacity-75 pointer-events-none"></div>
+        <div class="absolute -top-5 left-16 w-16 h-16 rounded-full bg-inherit blur-[2px] opacity-75 pointer-events-none"></div>
+        <div class="absolute -top-3 right-8 w-12 h-12 rounded-full bg-inherit blur-[2px] opacity-75 pointer-events-none"></div>
+      `;
+
+      // Click to open detailed spotlight
+      el.addEventListener('click', () => {
+        soundManager.playChime(index % 8, 1.8);
+        openDetailModal(dream);
+      });
+
+      return el;
+    }
+
+    // Initialize physical floating positions
+    function setupClouds() {
+      cloudsContainer.innerHTML = '';
+      cloudEntities = [];
+
+      const stageW = cloudStage.clientWidth;
+      const stageH = cloudStage.clientHeight;
+
+      const filtered = selectedCategory === 'ALL' 
+        ? dreamsList 
+        : dreamsList.filter(d => d.category === selectedCategory);
+
+      if (filtered.length === 0) {
+        cloudsContainer.innerHTML = `
+          <div class="h-full w-full flex flex-col items-center justify-center text-center p-6 pointer-events-none">
+            <div class="glass-panel px-7 py-6 rounded-3xl border border-purple-400/30 max-w-md shadow-2xl backdrop-blur-md pointer-events-auto">
+              <div class="text-4xl mb-2 animate-bounce">✨☁️✨</div>
+              <h3 class="font-serif text-lg font-bold text-amber-200">The 23rd CDM Sky Awaits Your Dreams</h3>
+              <p class="text-xs text-purple-200/80 mt-1.5 leading-relaxed">
+                Be the first to cast a dream cloud into the sky! Tap 
+                <button onclick="document.getElementById('openDreamModalBtn').click()" class="inline-block px-2.5 py-1 mx-1 font-semibold text-amber-300 bg-purple-800/80 rounded-lg border border-amber-400/40 hover:bg-purple-700 transition cursor-pointer">
+                  Cast Your Dream
+                </button> 
+                to share your thoughts across the stage projector.
+              </p>
+              <div class="mt-3.5 flex flex-wrap justify-center gap-1.5 text-[10px] text-purple-300/80">
+                <span class="bg-purple-900/50 px-2 py-0.5 rounded-full border border-purple-500/20">BSED-SCI</span>
+                <span class="bg-purple-900/50 px-2 py-0.5 rounded-full border border-purple-500/20">BEED-GEN</span>
+                <span class="bg-purple-900/50 px-2 py-0.5 rounded-full border border-purple-500/20">BECED</span>
+                <span class="bg-purple-900/50 px-2 py-0.5 rounded-full border border-purple-500/20">BTLED-ICT</span>
+                <span class="bg-purple-900/50 px-2 py-0.5 rounded-full border border-purple-500/20">BSCPE</span>
+                <span class="bg-purple-900/50 px-2 py-0.5 rounded-full border border-purple-500/20">BSIT</span>
+                <span class="bg-purple-900/50 px-2 py-0.5 rounded-full border border-purple-500/20">BSBA-HRM</span>
+                <span class="bg-purple-900/50 px-2 py-0.5 rounded-full border border-purple-500/20">BSE</span>
+              </div>
+            </div>
+          </div>
+        `;
+        updateBadgeCount();
+        return;
+      }
+
+      filtered.forEach((dream, i) => {
+        const domEl = createCloudElement(dream, i);
+        cloudsContainer.appendChild(domEl);
+
+        // Distribute nicely along width & height so they don't overlap completely
+        const cols = Math.ceil(Math.sqrt(filtered.length * 1.6));
+        const col = i % cols;
+        const row = Math.floor(i / cols);
+
+        const xSpacing = stageW / cols;
+        const ySpacing = (stageH - 180) / Math.max(1, Math.ceil(filtered.length / cols));
+
+        const posX = (col * xSpacing) + (Math.random() * 40 - 20) + 20;
+        const posY = 50 + (row * ySpacing) + (Math.random() * 40 - 20);
+
+        cloudEntities.push({
+          el: domEl,
+          dream: dream,
+          x: posX,
+          y: Math.max(20, Math.min(stageH - 190, posY)),
+          vx: (Math.random() * 0.4 + 0.3) * (Math.random() > 0.1 ? 1 : -0.5), // mostly drift rightwards
+          floatOffset: Math.random() * 100,
+          bobSpeed: Math.random() * 0.02 + 0.015,
+          scale: Math.random() * 0.12 + 0.94
+        });
+      });
+
+      updateBadgeCount();
+    }
+
+    let animationFrameId = null;
+
+    function animateClouds(time) {
+      const stageW = cloudStage.clientWidth;
+      const stageH = cloudStage.clientHeight;
+
+      for (let i = 0; i < cloudEntities.length; i++) {
+        const c = cloudEntities[i];
+
+        if (!isPaused) {
+          c.x += c.vx * driftSpeed;
+          c.floatOffset += c.bobSpeed;
+
+          // Bob gently in sinusoidal wave
+          const bobY = Math.sin(c.floatOffset) * 8;
+
+          // Loop around seamlessly across stage borders
+          if (c.x > stageW + 50) {
+            c.x = -280; // reappear from left
+            c.y = Math.random() * (stageH - 220) + 30;
+          } else if (c.x < -320) {
+            c.x = stageW + 20;
+          }
+
+          c.el.style.transform = `translate3d(${c.x}px, ${c.y + bobY}px, 0) scale(${c.scale})`;
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(animateClouds);
+    }
+
+    function updateBadgeCount() {
+      const countEl = document.getElementById('activeCountBadge');
+      if (countEl) {
+        countEl.textContent = `${cloudsContainer.children.length} Dreams Floating`;
+      }
+    }
+
+    // Open/Close Cast Dream Modal
+    const dreamModal = document.getElementById('dreamModal');
+    const openDreamModalBtn = document.getElementById('openDreamModalBtn');
+    const closeDreamModalBtn = document.getElementById('closeDreamModalBtn');
+    const cancelDreamBtn = document.getElementById('cancelDreamBtn');
+    const dreamForm = document.getElementById('dreamForm');
+    const messageInput = document.getElementById('messageInput');
+    const charCount = document.getElementById('charCount');
+
+    function toggleDreamModal(open) {
+      if (open) {
+        dreamModal.classList.remove('hidden');
+        setTimeout(() => dreamModal.classList.add('opacity-100'), 10);
+        soundManager.playChime(3, 1.2);
+        document.getElementById('authorInput').focus();
+      } else {
+        dreamModal.classList.remove('opacity-100');
+        setTimeout(() => dreamModal.classList.add('hidden'), 250);
+      }
+    }
+
+    openDreamModalBtn.addEventListener('click', () => toggleDreamModal(true));
+    closeDreamModalBtn.addEventListener('click', () => toggleDreamModal(false));
+    cancelDreamBtn.addEventListener('click', () => toggleDreamModal(false));
+
+    messageInput.addEventListener('input', () => {
+      charCount.textContent = `${messageInput.value.length}/180`;
+    });
+
+    // Form Submission
+    dreamForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const author = document.getElementById('authorInput').value.trim() || 'Anonymous CDMian';
+      const course = document.getElementById('courseInput').value || 'Colegio de Montalban';
+      const message = messageInput.value.trim();
+      const category = document.querySelector('input[name="dreamCategory"]:checked')?.value || 'Anniversary';
+      const theme = document.querySelector('input[name="cloudTheme"]:checked')?.value || 'purple';
+
+      if (!message) return;
+
+      const newDream = {
+        id: 'user-' + Date.now(),
+        author: author,
+        course: course,
+        category: category,
+        message: message,
+        theme: theme,
+        reactions: { sparkle: 1, heart: 1, star: 1 },
+        timestamp: 'Just now'
+      };
+
+      // Prepend to display prominently
+      dreamsList.unshift(newDream);
+      toggleDreamModal(false);
+      dreamForm.reset();
+      charCount.textContent = '0/180';
+
+      // Launch Harp Chimes & Stardust
+      soundManager.playHarpGlissando();
+      showToast('✨ Dream Ascended!', `"${author}"'s dream has joined the 23rd CDM sky!`);
+      setupClouds();
+    });
+
+    // Detail Spotlight Modal
+    const detailModal = document.getElementById('detailModal');
+    const closeDetailModalBtn = document.getElementById('closeDetailModalBtn');
+    let currentDetailDream = null;
+
+    function openDetailModal(dream) {
+      currentDetailDream = dream;
+      document.getElementById('detailQuote').textContent = `"${dream.message}"`;
+      document.getElementById('detailAuthor').textContent = dream.author;
+      document.getElementById('detailCourse').textContent = dream.course || 'Colegio de Montalban';
+      document.getElementById('detailTime').textContent = dream.timestamp;
+      document.getElementById('detailAvatar').textContent = (dream.author.charAt(0) || 'C').toUpperCase();
+
+      const catBadge = document.getElementById('detailCategoryBadge');
+      catBadge.textContent = dream.category === 'Anniversary' ? '🎂 CDM 23rd Anniversary Wish' :
+                             dream.category === 'Future' ? '🚀 Ambition & Future' :
+                             dream.category === 'Gratitude' ? '💜 Gratitude & Heart' : '💡 Inspiration';
+
+      document.getElementById('detailReactionSparkle').textContent = dream.reactions.sparkle;
+      document.getElementById('detailReactionHeart').textContent = dream.reactions.heart;
+      document.getElementById('detailReactionStar').textContent = dream.reactions.star;
+
+      detailModal.classList.remove('hidden');
+      setTimeout(() => {
+        detailModal.classList.add('opacity-100');
+        document.getElementById('detailCard').classList.remove('scale-95');
+      }, 10);
+    }
+
+    function closeDetailModal() {
+      detailModal.classList.remove('opacity-100');
+      document.getElementById('detailCard').classList.add('scale-95');
+      setTimeout(() => detailModal.classList.add('hidden'), 250);
+    }
+
+    closeDetailModalBtn.addEventListener('click', closeDetailModal);
+    detailModal.addEventListener('click', (e) => {
+      if (e.target === detailModal) closeDetailModal();
+    });
+
+    // Reaction handler inside detail modal
+    document.querySelectorAll('.reaction-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (!currentDetailDream) return;
+        const type = btn.dataset.reaction;
+        currentDetailDream.reactions[type] = (currentDetailDream.reactions[type] || 0) + 1;
+
+        if (type === 'sparkle') document.getElementById('detailReactionSparkle').textContent = currentDetailDream.reactions.sparkle;
+        if (type === 'heart') document.getElementById('detailReactionHeart').textContent = currentDetailDream.reactions.heart;
+        if (type === 'star') document.getElementById('detailReactionStar').textContent = currentDetailDream.reactions.star;
+
+        soundManager.playChime(6, 1.2);
+        btn.classList.add('scale-125');
+        setTimeout(() => btn.classList.remove('scale-125'), 200);
+
+        // Update card reaction count on main canvas
+        const domCloud = document.querySelector(`[data-id="${currentDetailDream.id}"]`);
+        if (domCloud) {
+          const countBadge = domCloud.querySelector('.text-amber-200');
+          if (countBadge) {
+            countBadge.textContent = currentDetailDream.reactions.heart + currentDetailDream.reactions.sparkle;
+          }
+        }
+      });
+    });
+
+    // Projector Mode: hides header/bars for clean display on auditorium projector
+    const mainHeader = document.getElementById('mainHeader');
+    const projectorToggleBtn = document.getElementById('projectorToggleBtn');
+    const stageControls = document.getElementById('stageControls');
+    const projectorWatermark = document.getElementById('projectorWatermark');
+    let isProjectorMode = false;
+
+    projectorToggleBtn.addEventListener('click', () => {
+      isProjectorMode = !isProjectorMode;
+      if (isProjectorMode) {
+        mainHeader.classList.add('-translate-y-full', 'opacity-0');
+        stageControls.classList.add('opacity-40', 'hover:opacity-100');
+        projectorWatermark.classList.remove('opacity-30');
+        projectorWatermark.classList.add('opacity-70');
+        showToast('📽️ Projector Stage Mode Active', 'Press ESC or move cursor to the top to restore controls.');
+      } else {
+        mainHeader.classList.remove('-translate-y-full', 'opacity-0');
+        stageControls.classList.remove('opacity-40');
+        projectorWatermark.classList.remove('opacity-70');
+        projectorWatermark.classList.add('opacity-30');
+      }
+    });
+
+    // Reveal header if mouse reaches the very top during projector mode
+    window.addEventListener('mousemove', (e) => {
+      if (isProjectorMode) {
+        if (e.clientY < 60) {
+          mainHeader.classList.remove('-translate-y-full', 'opacity-0');
+        } else if (e.clientY > 120) {
+          mainHeader.classList.add('-translate-y-full', 'opacity-0');
+        }
+      }
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (isProjectorMode) {
+          isProjectorMode = false;
+          mainHeader.classList.remove('-translate-y-full', 'opacity-0');
+          stageControls.classList.remove('opacity-40');
+        }
+        closeDetailModal();
+        toggleDreamModal(false);
+        toggleQrModal(false);
+      }
+    });
+
+    // Speed buttons
+    const speedSlowBtn = document.getElementById('speedSlowBtn');
+    const speedNormalBtn = document.getElementById('speedNormalBtn');
+    const pauseDriftBtn = document.getElementById('pauseDriftBtn');
+
+    speedSlowBtn.addEventListener('click', () => {
+      driftSpeed = 0.35;
+      isPaused = false;
+      speedSlowBtn.className = 'px-2 py-1 rounded-lg bg-purple-700 text-white font-semibold text-[11px]';
+      speedNormalBtn.className = 'px-2 py-1 rounded-lg bg-purple-900/60 hover:bg-purple-800 text-purple-200 text-[11px]';
+      pauseDriftBtn.className = 'px-2 py-1 rounded-lg bg-purple-900/60 hover:bg-purple-800 text-purple-200 text-[11px]';
+    });
+
+    speedNormalBtn.addEventListener('click', () => {
+      driftSpeed = 0.75;
+      isPaused = false;
+      speedNormalBtn.className = 'px-2 py-1 rounded-lg bg-purple-700 text-white font-semibold text-[11px]';
+      speedSlowBtn.className = 'px-2 py-1 rounded-lg bg-purple-900/60 hover:bg-purple-800 text-purple-200 text-[11px]';
+      pauseDriftBtn.className = 'px-2 py-1 rounded-lg bg-purple-900/60 hover:bg-purple-800 text-purple-200 text-[11px]';
+    });
+
+    pauseDriftBtn.addEventListener('click', () => {
+      isPaused = !isPaused;
+      if (isPaused) {
+        pauseDriftBtn.className = 'px-2 py-1 rounded-lg bg-amber-600 text-white font-semibold text-[11px]';
+      } else {
+        pauseDriftBtn.className = 'px-2 py-1 rounded-lg bg-purple-900/60 hover:bg-purple-800 text-purple-200 text-[11px]';
+      }
+    });
+
+    // Stardust Shuffle button
+    document.getElementById('scatterBtn').addEventListener('click', () => {
+      soundManager.playHarpGlissando();
+      setupClouds();
+      showToast('🌌 Stardust Shuffled', 'Clouds rearranged gracefully across the celestial sky.');
+    });
+
+    // Category Filter dropdown
+    document.getElementById('filterCategory').addEventListener('change', (e) => {
+      selectedCategory = e.target.value;
+      setupClouds();
+    });
+
+    // Audio Chime Toggle Button
+    const soundToggleBtn = document.getElementById('soundToggleBtn');
+    const soundIcon = document.getElementById('soundIcon');
+    const soundLabel = document.getElementById('soundLabel');
+
+    soundToggleBtn.addEventListener('click', () => {
+      soundManager.enabled = !soundManager.enabled;
+      if (soundManager.enabled) {
+        soundIcon.textContent = '🔔';
+        soundLabel.textContent = 'Sound Chimes: On';
+        soundManager.playChime(4, 1.2);
+      } else {
+        soundIcon.textContent = '🔕';
+        soundLabel.textContent = 'Sound Chimes: Off';
+      }
+    });
+
+    // QR Modal Controls
+    const qrModal = document.getElementById('qrModal');
+    const qrModalBtn = document.getElementById('qrModalBtn');
+    const closeQrModalBtn = document.getElementById('closeQrModalBtn');
+    const understoodQrBtn = document.getElementById('understoodQrBtn');
+
+    function toggleQrModal(open) {
+      if (open) {
+        qrModal.classList.remove('hidden');
+        setTimeout(() => qrModal.classList.add('opacity-100'), 10);
+      } else {
+        qrModal.classList.remove('opacity-100');
+        setTimeout(() => qrModal.classList.add('hidden'), 250);
+      }
+    }
+
+    qrModalBtn.addEventListener('click', () => toggleQrModal(true));
+    closeQrModalBtn.addEventListener('click', () => toggleQrModal(false));
+    understoodQrBtn.addEventListener('click', () => toggleQrModal(false));
+
+    // Toast Notification Utility
+    const toast = document.getElementById('toastNotification');
+    const toastTitle = document.getElementById('toastTitle');
+    const toastMessage = document.getElementById('toastMessage');
+    let toastTimeout = null;
+
+    function showToast(title, msg) {
+      clearTimeout(toastTimeout);
+      toastTitle.textContent = title;
+      toastMessage.textContent = msg;
+      toast.classList.remove('opacity-0', 'translate-y-[-20px]');
+      toastTimeout = setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-[-20px]');
+      }, 3500);
+    }
+
+    window.addEventListener('load', () => {
+      setupClouds();
+      animateClouds();
+
+      // Welcoming gentle chime when user first taps anywhere on screen
+      document.body.addEventListener('click', function primer() {
+        soundManager.initContext();
+        document.body.removeEventListener('click', primer);
+      }, { once: true });
+    });
+  </script>
+</body>
+</html>
